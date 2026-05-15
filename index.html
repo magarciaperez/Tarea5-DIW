@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página accesible doble AA con un vídeo subtitulado y con audiodescripción. Tarea 5 del módulo DIW. Autor: Miguel Ángel García Pérez.">
+  <meta name="author" content="Miguel Ángel García Pérez">
+
+  <title>Vídeo accesible AA · Tarea 5 DIW · Miguel Ángel García Pérez</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Enlaces de salto: ocultos visualmente, visibles al recibir foco con tabulador.
+       Cubren la pauta WCAG 2.4.1 (Evitar bloques) de nivel A. -->
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <a class="skip-link" href="#video">Saltar al vídeo</a>
+  <a class="skip-link" href="#pie">Saltar al pie de página</a>
+
+
+  <!-- ============================================================
+       CABECERA
+       Landmark <header> con título de página y menú de navegación.
+       ============================================================ -->
+  <header>
+    <div class="contenedor">
+      <h1>Vídeo accesible doble AA</h1>
+      <p class="subtitulo">Tarea 5 · Diseño de Interfaces Web</p>
+
+      <nav aria-label="Navegación principal">
+        <ul class="menu">
+          <li><a href="#video">Vídeo</a></li>
+          <li><a href="#descripcion">Sobre el vídeo</a></li>
+          <li><a href="#accesibilidad">Accesibilidad</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       CONTENIDO PRINCIPAL
+       Landmark <main> con tres secciones: vídeo, descripción y
+       características de accesibilidad.
+       ============================================================ -->
+  <main id="contenido">
+
+    <!-- Sección del vídeo. El elemento <video> incluye:
+         - controles nativos (operables por teclado, pauta 2.1.1)
+         - imagen de póster con el nombre del alumno y el título
+         - una pista <track> de subtítulos en español (pauta 1.2.2)
+         - una pista <track> de audiodescripción (pauta 1.2.5) -->
+    <section id="video" aria-labelledby="video-titulo" class="seccion">
+      <div class="contenedor">
+        <h2 id="video-titulo">Tráiler de «El Hoyo» con subtítulos y audiodescripción</h2>
+
+        <div class="video-wrapper">
+          <video
+            controls
+            preload="metadata"
+            poster="video/Portada_video.png"
+            width="900"
+            height="506">
+
+            <source src="video/video.mp4" type="video/mp4">
+
+            <!-- Pista de subtítulos (kind="subtitles") en español -->
+            <track
+              kind="subtitles"
+              src="video/subtitulos_es.vtt"
+              srclang="es"
+              label="Subtítulos en español"
+              default>
+
+            <!-- Pista de audiodescripción (kind="descriptions") en español.
+                 Un lector de pantalla sintetiza la voz a partir del VTT. -->
+            <track
+              kind="descriptions"
+              src="video/audiodescripcion_es.vtt"
+              srclang="es"
+              label="Audiodescripción en español">
+
+            <!-- Texto alternativo para navegadores muy antiguos -->
+            <p>
+              Tu navegador no soporta vídeo HTML5. Puedes
+              <a href="video/video.mp4">descargar el vídeo en MP4</a>.
+            </p>
+          </video>
+        </div>
+
+        <p class="nota-reproductor">
+          Para activar los subtítulos o la audiodescripción, usa el botón
+          <abbr title="Subtítulos">CC</abbr> del reproductor.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- Sección descriptiva del clip -->
+    <section id="descripcion" aria-labelledby="descripcion-titulo" class="seccion">
+      <div class="contenedor">
+        <h2 id="descripcion-titulo">Sobre el vídeo</h2>
+        <p>
+          Este vídeo es un fragmento del tráiler oficial de la película
+          <cite lang="es">El Hoyo</cite> (Galder Gaztelu-Urrutia, 2019), distribuido
+          por Netflix en su canal oficial de YouTube. Se ha seleccionado por contar
+          con diálogos en español y pausas naturales entre ellos, condición necesaria
+          para insertar audiodescripción sin solapamientos.
+        </p>
+        <p>
+          El clip se ha recortado y procesado con HandBrake para mantener una
+          duración de menos de tres minutos, conforme al enunciado de la tarea.
+          Los subtítulos se han generado de forma asistida y revisados manualmente.
+          La pista de audiodescripción se ha redactado a partir de un análisis previo
+          del vídeo, identificando cada pausa de diálogo con su descripción visual.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- Sección con las características de accesibilidad implementadas.
+         Aporta semántica adicional para el análisis de Examinator y TAW. -->
+    <section id="accesibilidad" aria-labelledby="accesibilidad-titulo" class="seccion">
+      <div class="contenedor">
+        <h2 id="accesibilidad-titulo">Características de accesibilidad</h2>
+        <p>
+          La página y el vídeo se ajustan al nivel de conformidad doble A (AA) de
+          las WCAG 2.0 y a la norma UNE 139803:2012. En concreto:
+        </p>
+        <ul class="lista-accesibilidad">
+          <li>
+            <strong>Subtítulos sincronizados</strong> en formato WebVTT, en español
+            (pauta 1.2.2, nivel A).
+          </li>
+          <li>
+            <strong>Audiodescripción</strong> implementada como pista
+            <code>&lt;track kind="descriptions"&gt;</code>
+            (pauta 1.2.5, nivel AA).
+          </li>
+          <li>
+            <strong>Estructura semántica</strong> con
+            <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>,
+            <code>&lt;main&gt;</code> y <code>&lt;footer&gt;</code>,
+            y una jerarquía de encabezados con un único
+            <code>&lt;h1&gt;</code> (pauta 1.3.1).
+          </li>
+          <li>
+            <strong>Enlaces de salto</strong> al contenido principal, al vídeo y al pie
+            (pauta 2.4.1).
+          </li>
+          <li>
+            <strong>Operabilidad por teclado</strong> en todo el reproductor y la
+            navegación, con foco visible en cualquier elemento interactivo
+            (pautas 2.1.1 y 2.4.7).
+          </li>
+          <li>
+            <strong>Contraste de color</strong> superior a 4,5:1 en texto normal y
+            a 3:1 en texto grande (pauta 1.4.3).
+          </li>
+          <li>
+            <strong>Idioma declarado</strong> mediante
+            <code>lang="es"</code> en el elemento raíz (pauta 3.1.1).
+          </li>
+          <li>
+            <strong>Diseño adaptable</strong> a móvil, tableta y escritorio
+            sin pérdida de información (pauta 1.4.10).
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       PIE DE PÁGINA
+       Landmark <footer> con la autoría y el contexto académico.
+       ============================================================ -->
+  <footer id="pie">
+    <div class="contenedor">
+      <p>
+        © 2026 · Miguel Ángel García Pérez · DNI 09769811D
+      </p>
+      <p>
+        Tarea 5 · Módulo DIW · Ciclo DAW · Fomento Ocupacional FOC
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
